@@ -1,0 +1,23 @@
+{
+  "name": "camp",
+  "version": "1.0.0",
+  "description": "camp site",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cnfc/camp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Cnfc/camp/issues"
+  },
+  "homepage": "https://github.com/Cnfc/camp#readme",
+  "dependencies": {
+    "ejs": "^2.5.7",
+    "express": "^4.16.2"
+  }
+}
