@@ -2,6 +2,8 @@
 
 <h1>This is the camp page!</h1>
 
+<a href="/campgrounds/new">ADD new campgrounds</a>
+
 <% campgrounds.forEach(function(campground){ %>
   <div>
     <h4><%= campground.name %></h4>
@@ -10,6 +12,5 @@
 <%}) %>
 
 
-
-
+<a href="/campgrounds">Go back</a>
 <% include partials/footer %>
