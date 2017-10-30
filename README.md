@@ -1,2 +1,2 @@
 # camp
-camp site with backend(node &amp; express) also mongoDB
+camp site with backend nodejs, express & mongoDB
