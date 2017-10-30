@@ -3,7 +3,7 @@ var express    = require("express"),
     bodyParser = require("body-parser"),
     mongoose   = require("mongoose"),
     Campground = require("./models/campground"),
-    // comment    = require("./models/"),
+    Comment    = require("./models/comment"),
     seedDB     = require("./seeds")
 
 
@@ -85,6 +85,43 @@ app.get("/campgrounds/:id/comments/new", function(req, res){
   });
 
 });
+
+app.get("/campgrounds/:id/comments/new", function(req, res){
+    // find campground by id
+    Campground.findById(req.params.id, function(err, campground){
+        if(err){
+            console.log(err);
+        } else {
+             res.render("comments/new", {campground: campground});
+        }
+    })
+});
+
+
+app.post("/campgrounds/:id/comments", function(req, res){
+  // looking campground using ID
+  Campground.findById(req.params.id, function(err, campground){
+    if(err){
+      console.log(err);
+      res.redirect("/campgrounds");
+    } else {
+      // Comment.create
+        Comment.create(req.body.comment, function(err, comment){
+          if(err){
+            console.log(err);
+          } else {
+            campground.comments.push(comment);
+            campground.save();
+            res.redirect("/campgrounds/" + campground._id);
+          }
+        });
+      }
+  });
+  // Create new comment
+  // COnnect new comments ro campground
+  // redirect campground
+});
+
 
 app.listen(process.env.PORT, process.env.OP, function(){
   console.log("The YalpCamp Has starRt");
