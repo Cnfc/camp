@@ -1,6 +1,6 @@
 var express    = require("express"),
     app        = express(),
-    bodyParser = require('body-parser'),
+    bodyParser = require("body-parser"),
     mongoose   = require("mongoose"),
     Campground = require("./models/campground"),
     // comment    = require("./models/"),
@@ -9,42 +9,10 @@ var express    = require("express"),
 
 
 seedDB();
-mongoose.connect("mongodb://localhost/yelp_camp");
+mongoose.connect("mongodb://localhost/yelp_camp_v3");
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 
-
-//
-// Campground.create(
-//   {
-//     name: "Mountain!!",
-//     image: "https://farm1.staticflickr.com/130/321487195_ff34bde2f5.jpg",
-//     description: "This is a huge granilte hill"
-//
-//   }, function(err, campground){
-//     if(err){
-//       console.log(err);
-//     } else {
-//       console.log("NEWLy created campground: ");
-//       console.log(campground);
-//     }
-//   });
-
-
-var campgrounds = [
-  {name: "Salmon Creak", image: "https://farm1.staticflickr.com/130/321487195_ff34bde2f5.jpg"},
-  {name: "Grantile Hill", image: "https://farm1.staticflickr.com/130/321487195_ff34bde2f5.jpg"},
-  {name: "Mountain", image: "https://farm1.staticflickr.com/130/321487195_ff34bde2f5.jpg"},
-  {name: "Mountain", image: "https://farm1.staticflickr.com/130/321487195_ff34bde2f5.jpg"},
-  {name: "Salmon Creak", image: "https://farm1.staticflickr.com/130/321487195_ff34bde2f5.jpg"},
-  {name: "Grantile Hill", image: "https://farm1.staticflickr.com/130/321487195_ff34bde2f5.jpg"},
-  {name: "Mountain", image: "https://farm1.staticflickr.com/130/321487195_ff34bde2f5.jpg"},
-  {name: "Mountain", image: "https://farm1.staticflickr.com/130/321487195_ff34bde2f5.jpg"},
-  {name: "Salmon Creak", image: "https://farm1.staticflickr.com/130/321487195_ff34bde2f5.jpg"},
-  {name: "Grantile Hill", image: "https://farm1.staticflickr.com/130/321487195_ff34bde2f5.jpg"},
-  {name: "Mountain", image: "https://farm1.staticflickr.com/130/321487195_ff34bde2f5.jpg"},
-  {name: "Mountain", image: "https://farm1.staticflickr.com/130/321487195_ff34bde2f5.jpg"}
-];
 
 app.get("/", function(req, res){
   res.render("landing");
@@ -56,7 +24,7 @@ app.get("/", function(req, res){
 //   res.redirect("/friends");
 // });
 //
-
+// INDEX SHOW ALL CAMPGROUNDS
 app.get("/campgrounds", function(req, res){
   //  GET ALL CAMPGROUNDS FROM DB
   Campground.find({}, function(err, allCampgrounds){
@@ -68,12 +36,12 @@ app.get("/campgrounds", function(req, res){
   });
 });
 
-
+// CREAT
 app.post("/campgrounds", function(req, res){
   var name = req.body.name;
   var image = req.body.image;
   var desc = req.body.description;
-  var newCampground = {name: name, image: image, description: desc};
+  var newCampground = {name: name, image: image, description: desc}
   // CREATE NEW CAMPGROUNDS AND SAVE TO DB
   Campground.create(newCampground, function(err, newlyCreated){
     if(err){
@@ -92,10 +60,11 @@ app.get("/campgrounds/new", function(req, res){
 // SHOWS MORE INFO ABOUT ONE CAMPGROUND
 app.get("/campgrounds/:id", function(req,res){
   //find the campground with providede id
-  Campground.findById(req.params.id, function(err, foundCampground){
+  Campground.findById(req.params.id).populate("comments").exec(function(err, foundCampground){
     if(err){
       console.log(err);
     } else {
+      console.log(foundCampground)
       //render show template with that campground
       res.render("show", {campground: foundCampground});
     }

@@ -26,7 +26,7 @@ function seedDB(){
   // Remove all campgrounds
   Campground.remove({}, function(err){
     if(err){
-      console.log(err)
+      console.log(err);
     }
     console.log("removed campgrounds!");
     // add a few campgrounds
@@ -38,18 +38,17 @@ function seedDB(){
         } else {
           console.log("added a campground");
           //add a few comments
-          comment.create(
+          Comment.create(
             {
-              text: "This palce is great",
+              text: "This place is great",
               author: "Tess"
             }, function(err, comment){
               if(err){
-                consoloe.log(err);
-
+                console.log(err);
               } else {
                 campground.comments.push(comment);
                 campground.save();
-                consoloe.log("Created new comment");
+                console.log("Created new comment");
               }
             });
         }
