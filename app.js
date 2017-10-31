@@ -2,8 +2,11 @@ var express    = require("express"),
     app        = express(),
     bodyParser = require("body-parser"),
     mongoose   = require("mongoose"),
+    passport   = require("passport"),
+    LocalStrategy = require("passport-local"),
     Campground = require("./models/campground"),
     Comment    = require("./models/comment"),
+    User       = require("./models/user"),
     seedDB     = require("./seeds")
 
 mongoose.connect("mongodb://localhost/yelp_camp_v4");
@@ -123,7 +126,7 @@ app.post("/campgrounds/:id/comments", function(req, res){
 });
 
 
-app.listen(process.env.PORT, process.env.OP, function(){
+app.listen(process.env.PORT, process.env.IP, function(){
   console.log("The YalpCamp Has starRt");
 });
 
