@@ -90,6 +90,7 @@ app.get("/campgrounds/:id", function(req,res){
 
 // ====================================================
 //COMMENTS ROUTES
+// ====================================================
 app.get("/campgrounds/:id/comments/new", function(req, res){
   Campground.findById(req.params.id, function(err, campground){
     if(err){
@@ -136,7 +137,7 @@ app.post("/campgrounds/:id/comments", function(req, res){
   // COnnect new comments ro campground
   // redirect campground
 });
-//  ========================================================
+//  ===========================================================
 // AUTH ROUTES
 //=============================================================
 
@@ -151,12 +152,23 @@ app.post("/register", function(req, res){
     if(err){
       console.log(err);
       return res.render("register");
-    } else {
+    }
       passport.authenticate("local")(req, res, function(){
         res.redirect("/campgrounds");
       });
-    };
   });
+});
+// show login form
+app.get("/login", function(req, res){
+  res.render("login");
+});
+// Handaling login logic
+// app.post("/login", middlware, callback)
+app.post("/login", passport.authenticate("local",
+  {
+   successRedirect: "/campgrounds",
+   failureRedirect: "/login"
+ }), function(req, res){
 
 });
 
