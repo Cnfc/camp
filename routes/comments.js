@@ -46,6 +46,19 @@ router.post("/", isLoggedIn, function(req, res){
   // COnnect new comments ro campground
   // redirect campground
 });
+// COMMENT ROUTE
+router.get("/:comment_id/edit", function(req, res){
+  Comment.findById(req.params.comment_id, function(err, foundComment){
+    if(err){
+      res.redirect("back");
+    } else {
+      res.render("comments/edit", {campground_id: req.params.id, comment: foundComment});
+    }
+  });
+});
+
+// COMMENT UPDATE
+
 
 //middleware
 function isLoggedIn(req, res, next){
