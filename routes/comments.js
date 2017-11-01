@@ -68,6 +68,11 @@ router.put("/:comment_id", function(req, res){
   });
 });
 
+// COmment destroy route
+router.delete("/:comment_id", function(req, res){
+  res.send("alalla");
+});
+
 //middleware
 function isLoggedIn(req, res, next){
   if(req.isAuthenticated()){
