@@ -16,7 +16,9 @@ var commentRoutes    = require("./routes/comments"),
     campgroundRounds = require("./routes/campgrounds"),
     indexRounds      = require("./routes/index")
 
-mongoose.connect("mongodb://localhost/yelp_camp_vf");
+// mongoose.connect("mongodb://localhost/yelp_camp_vf");
+mongoose.connect("mongodb://TMW:mLAB24CC@ds245805.mlab.com:45805/gallery");
+// mongodb://TMW:mLAB24CC@ds245805.mlab.com:45805/gallery
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
@@ -52,5 +54,5 @@ app.listen(process.env.PORT, process.env.IP, function(){
   console.log("The YalpCamp Has starRt");
 });
 
-
+//
 app.listen(3000);
