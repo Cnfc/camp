@@ -58,6 +58,7 @@ router.get("/:id", function(req,res){
 // EDIT CAMPGROUND ROUND
 router.get("/:id/edit", middleware.checkCampgroundOwnership, function(req, res){
   Campground.findById(req.params.id, function(err, foundCampground){
+    // req.flash("error", "campground not found");
     res.render("campgrounds/edit", {campground: foundCampground});
     });
 });
