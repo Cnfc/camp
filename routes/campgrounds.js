@@ -10,7 +10,7 @@ router.get("/", function(req, res){
     if(err){
       console.log(err);
     } else {
-      res.render("campgrounds/index", {campgrounds: allCampgrounds, currentUser: req.user});
+      res.render("campgrounds/index", {campgrounds: allCampgrounds});
     }
   });
 });
@@ -67,12 +67,11 @@ router.put("/:id/", middleware.checkCampgroundOwnership, function(req, res){
   //  find and update the correct campground
   Campground.findByIdAndUpdate(req.params.id, req.body.campground, function(err, updatedCampground){
     if(err){
-      res,redirect("/campgrounds");
+      res.redirect("/campgrounds");
     } else {
       res.redirect("/campgrounds/" + req.params.id);
     }
   });
-  //redirect
 
 });
 

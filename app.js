@@ -13,8 +13,8 @@ var express    = require("express"),
 
 // requiring routes
 var commentRoutes    = require("./routes/comments"),
-    campgroundRounds = require("./routes/campgrounds"),
-    indexRounds      = require("./routes/index")
+    campgroundRountes = require("./routes/campgrounds"),
+    indexRountes     = require("./routes/index")
 
 // mongoose.connect("mongodb://localhost/yelp_camp_vf");
 mongoose.connect("mongodb://TMW:mLAB24CC@ds245805.mlab.com:45805/gallery");
@@ -45,13 +45,13 @@ app.use(function(req, res, next){
   next();
 });
 
-app.use("/", indexRounds);
-app.use("/campgrounds", campgroundRounds);
+app.use("/", indexRoutes);
+app.use("/campgrounds", campgroundRoutes);
 app.use("/campgrounds/:id/comments", commentRoutes);
 
 
 app.listen(process.env.PORT, process.env.IP, function(){
-  console.log("The YalpCamp Has starRt");
+  console.log("The YalpCamp Has start");
 });
 
 //
